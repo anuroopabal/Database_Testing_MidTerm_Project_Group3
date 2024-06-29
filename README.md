@@ -39,6 +39,36 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 
 
 ## Database Creation
+```sql
+CREATE DATABASE "OnlineBookStoreDB"
+```
+
+#### books table:
+```sql
+CREATE SEQUENCE book_id_seq START 1;
+CREATE TABLE books (
+    book_id VARCHAR(50) PRIMARY KEY DEFAULT ('BOOK' || LPAD(nextval('book_id_seq')::TEXT,1,'')) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    author_id INT REFERENCES authors(author_id) NOT NULL,
+    publisher_id INT REFERENCES publishers(publisher_id) NOT NULL,
+    publication_date DATE NOT NULL,
+    book_format VARCHAR(20) CHECK (book_format IN ('Physical', 'E-book', 'Audiobook')) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+```
+
+#### sales table:
+```sql
+CREATE SEQUENCE sale_id_seq START 1;
+CREATE TABLE sales (
+    sale_id VARCHAR(50) PRIMARY KEY DEFAULT ('ORDER' || LPAD(nextval('sale_id_seq')::TEXT,1,'')) NOT NULL,
+    customer_id varchar(50) REFERENCES customers(customer_id) NOT NULL,
+    book_id varchar(50) REFERENCES books(book_id) NOT NULL,
+    sale_date DATE DEFAULT CURRENT_DATE NOT NULL,
+    quantity INT NOT NULL
+);
+```
 
 ## DDL/DML - CRUD
 
