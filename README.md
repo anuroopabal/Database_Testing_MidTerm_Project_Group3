@@ -14,7 +14,7 @@ Group03:
 ## Database Schema
 Online Bookstore Database Design, including the below mentioned tables and its attributes.
 
-### Tables
+### Tables and Attributes
 #### 1. Customers 
 
 | Attribute        | Type          | Description                             | 
@@ -45,6 +45,25 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 | book_format      | VARCHAR(20)   | It can only take values 'Physical', 'E-book', 'Audiobook' |
 | price            | DECIMAL(10, 2)| Price of the book                                         |
 
+#### 5. Reviews 
+
+| Attribute        | Type          | Description                                    | 
+
+|------------------|---------------|------------------------------------------------| 
+
+| review_id        | VARCHAR(50)   | Primary Key; Review unique ID                  | 
+
+| customer_id      | INT           | Foreign Key; REFERENCES customers(customer_id) | 
+
+| book_id          | INT           | Foreign Key; REFERENCES books(book_id)         | 
+
+| review_date      | DATE          | Date of the review                             | 
+
+| rating           | INT           | Rating given by the customer                   | 
+
+| comment          | TEXT          | Review comment by customer                     | 
+
+
 
 #### 6. Sales
 | Attribute        | Type          | Description                                    |
@@ -55,13 +74,25 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 | sale_date        | DATE          | Date of the sale                               |
 | quantity         | INT           | Quantity of books sold                         |
 
-
+## SQL Code to Create the Database
 ## Database Creation
 ```sql
 CREATE DATABASE "OnlineBookStoreDB"
 ```
 *Use the created Database and create below tables.*
 ```sql
+
+--customers table:
+CREATE SEQUENCE customer_id_seq START 1;  
+CREATE TABLE customers ( 
+    customer_id VARCHAR(50) PRIMARY KEY DEFAULT ('CUST' || LPAD(nextval('customer_id_seq')::TEXT, 1, '')) NOT NULL, 
+    name VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) UNIQUE NOT NULL, 
+    address VARCHAR(200) NOT NULL, 
+    phone NUMERIC(10,0) UNIQUE NOT NULL, 
+    registration_date DATE DEFAULT CURRENT_DATE 
+); 
+
 --books table:
 CREATE SEQUENCE book_id_seq START 1;
 CREATE TABLE books (
@@ -74,6 +105,17 @@ CREATE TABLE books (
     book_format VARCHAR(20) CHECK (book_format IN ('Physical', 'E-book', 'Audiobook')) NOT NULL,
     price DECIMAL(10, 2) NOT NULL
 );
+
+--reviews table:
+CREATE SEQUENCE review_id_seq START 1;  
+CREATE TABLE reviews ( 
+    review_id VARCHAR(50) PRIMARY KEY DEFAULT ('REV' || LPAD(nextval('review_id_seq')::TEXT,3,'0')) NOT NULL, 
+    customer_id varchar(50) REFERENCES customers(customer_id) NOT NULL, 
+    book_id varchar(50) REFERENCES books(book_id) NOT NULL, 
+    review_date DATE DEFAULT CURRENT_DATE NOT NULL, 
+    rating INT NOT NULL, 
+    comment TEXT
+); 
 
 --sales table:
 CREATE SEQUENCE sale_id_seq START 1;
@@ -88,7 +130,73 @@ CREATE TABLE sales (
 
 ## DDL/DML - CRUD
 
-## Queries for Requirements
+## SQL Queries for Requirements
+#### 1. Power writers 
+
+```sql 
+
+SELECT author_id, name 
+FROM Authors 
+WHERE author_id IN ( 
+    SELECT author_id 
+    FROM Books 
+    WHERE genre = 'specified_genre' AND publication_date > NOW() - INTERVAL 'specified_years' YEAR 
+    GROUP BY author_id 
+    HAVING COUNT(*) > specified_count 
+); 
+
+``` 
+
+#### 2. Loyal Customers 
+
+```sql 
+
+SELECT c.customer_id, c.name, c.email, SUM(s.quantity * b.price) AS total_spent_last_year 
+FROM Customers c 
+JOIN Sales s ON c.customer_id = s.customer_id 
+JOIN Books b ON s.book_id = b.book_id 
+WHERE s.sale_date >= CURRENT_DATE - INTERVAL '1 year' 
+GROUP BY c.customer_id, c.name, c.email 
+HAVING SUM(s.quantity * b.price) > 50; 
+
+``` 
+#### 3. Well Reviewed Books 
+
+```sql 
+
+SELECT b.book_id, b.title, b.genre, b.author_id, b.publisher_id, b.publication_date, b.book_format, b.price, AVG(r.rating) AS average_rating 
+FROM Books b 
+JOIN Reviews r ON b.book_id = r.book_id 
+GROUP BY b.book_id, b.title, b.genre, b.author_id, b.publisher_id, b.publication_date, b.book_format, b.price 
+HAVING AVG(r.rating) > (SELECT AVG(rating) FROM Reviews); 
+
+``` 
+
+#### 4. Most Popular Genre by Sales 
+
+```sql 
+
+SELECT b.genre, SUM(s.quantity) AS total_sales 
+FROM Books b 
+JOIN Sales s ON b.book_id = s.book_id 
+GROUP BY b.genre 
+ORDER BY total_sales DESC 
+LIMIT 1; 
+
+``` 
+
+#### 5. 10 Most Recent Posted Reviews 
+
+```sql 
+
+SELECT r.review_id, r.customer_id, r.book_id, r.review_date, r.rating, r.comment, c.name AS customer_name, b.title AS book_title 
+FROM Reviews r 
+JOIN Customers c ON r.customer_id = c.customer_id 
+JOIN Books b ON r.book_id = b.book_id 
+ORDER BY r.review_date DESC 
+LIMIT 10; 
+
+``` 
 
 ## Typescript Interface
 
