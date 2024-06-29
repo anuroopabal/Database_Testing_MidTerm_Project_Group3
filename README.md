@@ -15,6 +15,24 @@ Group03:
 Online Bookstore Database Design, including the below mentioned tables and its attributes.
 
 ### Tables
+#### 1. Customers 
+
+| Attribute        | Type          | Description                             | 
+
+|------------------|---------------|-----------------------------------------| 
+
+| customer_id      | VARCHAR(50)   | Primary Key; Customer unique ID         | 
+
+| name             | VARCHAR(100)  | Name of the customer                    | 
+
+| email            | VARCHAR(100)  | Email address of the customer           | 
+
+| address          | VARCHAR(200)  | Address of the customer                 | 
+
+| phone            | NUMERIC(10,0) | Email address of the customer           | 
+
+| registration_date| DATE          | Date of registration                    | 
+
 #### 4. Books
 | Attribute        | Type          | Description                                               |
 |------------------|---------------|-----------------------------------------------------------|
