@@ -150,7 +150,7 @@ CREATE TABLE sales (
 
 CREATE SEQUENCE book_id_seq START 1;
 CREATE TABLE books (
-    book_id VARCHAR(50) PRIMARY KEY DEFAULT ('BOOK' || LPAD(nextval('book_id_seq')::TEXT,1,'')) NOT NULL,
+    book_id VARCHAR(50) PRIMARY KEY DEFAULT ('BOOK' || LPAD(nextval('book_id_seq')::TEXT,5,'')) NOT NULL,
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(50) NOT NULL,
     author_id INT REFERENCES authors(author_id) NOT NULL,
