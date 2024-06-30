@@ -102,6 +102,12 @@ CREATE TABLE authors (
     name VARCHAR(100) UNIQUE NOT NULL
 );
 
+--publishers table:
+CREATE TABLE publishers (
+    publisher_id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(100) UNIQUE NOT NULL
+); 
+
 --books table:
 CREATE SEQUENCE book_id_seq START 1;
 CREATE TABLE books (
