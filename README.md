@@ -143,7 +143,25 @@ CREATE TABLE sales (
 );
 ```
 
-## DDL/DML - CRUD
+## DDL/DML - CRUD Operations in books Table
+#### DDL:
+*SQL code is already provided in above section.*
+```sql
+
+CREATE SEQUENCE book_id_seq START 1;
+CREATE TABLE books (
+    book_id VARCHAR(50) PRIMARY KEY DEFAULT ('BOOK' || LPAD(nextval('book_id_seq')::TEXT,1,'')) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    author_id INT REFERENCES authors(author_id) NOT NULL,
+    publisher_id INT REFERENCES publishers(publisher_id) NOT NULL,
+    publication_date DATE NOT NULL,
+    book_format VARCHAR(20) CHECK (book_format IN ('Physical', 'E-book', 'Audiobook')) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+```
+
+
 
 ## SQL Queries for Requirements
 #### 1. Power writers 
