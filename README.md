@@ -88,7 +88,7 @@ CREATE DATABASE "OnlineBookStoreDB"
 --customers table:
 CREATE SEQUENCE customer_id_seq START 1;  
 CREATE TABLE customers ( 
-    customer_id VARCHAR(50) PRIMARY KEY DEFAULT ('CUST' || LPAD(nextval('customer_id_seq')::TEXT, 1, '')) NOT NULL, 
+    customer_id VARCHAR(50) PRIMARY KEY DEFAULT ('CUST' || LPAD(nextval('customer_id_seq')::TEXT, 5, '')) NOT NULL, 
     name VARCHAR(100) NOT NULL, 
     email VARCHAR(100) UNIQUE NOT NULL, 
     address VARCHAR(200) NOT NULL, 
@@ -111,7 +111,7 @@ CREATE TABLE publishers (
 --books table:
 CREATE SEQUENCE book_id_seq START 1;
 CREATE TABLE books (
-    book_id VARCHAR(50) PRIMARY KEY DEFAULT ('BOOK' || LPAD(nextval('book_id_seq')::TEXT,1,'')) NOT NULL,
+    book_id VARCHAR(50) PRIMARY KEY DEFAULT ('BOOK' || LPAD(nextval('book_id_seq')::TEXT,5,'')) NOT NULL,
     title VARCHAR(100) NOT NULL,
     genre VARCHAR(50) NOT NULL,
     author_id INT REFERENCES authors(author_id) NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE books (
 --reviews table:
 CREATE SEQUENCE review_id_seq START 1;  
 CREATE TABLE reviews ( 
-    review_id VARCHAR(50) PRIMARY KEY DEFAULT ('REV' || LPAD(nextval('review_id_seq')::TEXT,3,'0')) NOT NULL, 
+    review_id VARCHAR(50) PRIMARY KEY DEFAULT ('REV' || LPAD(nextval('review_id_seq')::TEXT,5,'0')) NOT NULL, 
     customer_id varchar(50) REFERENCES customers(customer_id) NOT NULL, 
     book_id varchar(50) REFERENCES books(book_id) NOT NULL, 
     review_date DATE DEFAULT CURRENT_DATE NOT NULL, 
@@ -135,7 +135,7 @@ CREATE TABLE reviews (
 --sales table:
 CREATE SEQUENCE sale_id_seq START 1;
 CREATE TABLE sales (
-    sale_id VARCHAR(50) PRIMARY KEY DEFAULT ('ORDER' || LPAD(nextval('sale_id_seq')::TEXT,1,'')) NOT NULL,
+    sale_id VARCHAR(50) PRIMARY KEY DEFAULT ('ORDER' || LPAD(nextval('sale_id_seq')::TEXT,5,'')) NOT NULL,
     customer_id varchar(50) REFERENCES customers(customer_id) NOT NULL,
     book_id varchar(50) REFERENCES books(book_id) NOT NULL,
     sale_date DATE DEFAULT CURRENT_DATE NOT NULL,
