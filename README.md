@@ -6,6 +6,9 @@ Group03:
     * Create database and tables using SQL code.
     * Create the Typescript interface for table modification.
 * Member 2: Sangeetha Radhakrishnan - 
+    * Design the database schema with Authors and Publishers tables.
+    * Create tables using SQL code.
+    * Develop SQL code for database creation and insertion.
 * Member 3: Swathi Kona - 
     * Design the database schema with customers and sales tables.
     * Create tables using SQL code.
