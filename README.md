@@ -36,6 +36,13 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 
 | registration_date| DATE          | Date of registration                    | 
 
+#### 2. Authors
+
+| Attribute | Type | Description |
+|------------------|----------------------|----------------------------------|
+| author_id | SERIAL PRIMARY KEY | Primary Key; author unique ID |
+| name | VARCHAR(100) | Name of the author | 
+
 #### 4. Books
 | Attribute        | Type          | Description                                               |
 |------------------|---------------|-----------------------------------------------------------|
