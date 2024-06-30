@@ -36,6 +36,13 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 | author_id | SERIAL PRIMARY KEY | Primary Key; author unique ID |
 | name | VARCHAR(100) | Name of the author | 
 
+#### 3. Publishers
+
+| Attribute | Type | Description |
+|------------------|----------------------|----------------------------------|
+| publisher_id | SERIAL PRIMARY KEY | Primary Key; publisher unique ID |
+| name | VARCHAR(100) | Name of the publisher | 
+
 #### 4. Books
 | Attribute        | Type          | Description                                               |
 |------------------|---------------|-----------------------------------------------------------|
