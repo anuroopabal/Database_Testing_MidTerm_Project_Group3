@@ -96,6 +96,12 @@ CREATE TABLE customers (
     registration_date DATE DEFAULT CURRENT_DATE 
 ); 
 
+--authors table: 
+CREATE TABLE authors (
+    author_id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
 --books table:
 CREATE SEQUENCE book_id_seq START 1;
 CREATE TABLE books (
