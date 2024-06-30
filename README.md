@@ -21,19 +21,12 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 #### 1. Customers 
 
 | Attribute        | Type          | Description                             | 
-
 |------------------|---------------|-----------------------------------------| 
-
 | customer_id      | VARCHAR(50)   | Primary Key; Customer unique ID         | 
-
 | name             | VARCHAR(100)  | Name of the customer                    | 
-
 | email            | VARCHAR(100)  | Email address of the customer           | 
-
 | address          | VARCHAR(200)  | Address of the customer                 | 
-
 | phone            | NUMERIC(10,0) | Email address of the customer           | 
-
 | registration_date| DATE          | Date of registration                    | 
 
 #### 2. Authors
@@ -58,21 +51,13 @@ Online Bookstore Database Design, including the below mentioned tables and its a
 #### 5. Reviews 
 
 | Attribute        | Type          | Description                                    | 
-
 |------------------|---------------|------------------------------------------------| 
-
 | review_id        | VARCHAR(50)   | Primary Key; Review unique ID                  | 
-
 | customer_id      | INT           | Foreign Key; REFERENCES customers(customer_id) | 
-
 | book_id          | INT           | Foreign Key; REFERENCES books(book_id)         | 
-
 | review_date      | DATE          | Date of the review                             | 
-
 | rating           | INT           | Rating given by the customer                   | 
-
 | comment          | TEXT          | Review comment by customer                     | 
-
 
 
 #### 6. Sales
