@@ -252,6 +252,55 @@ LIMIT 10;
 ``` 
 
 ## Typescript Interface
+*Typescript Interface for customers table:*
+
+```
+interface Customers {
+    customer_id: string;
+    name: string;
+    email: string;
+    address: string;
+    phone: number;
+    registration_date: string;
+}
+interface CustomersCRUD{
+    addCustomer(customer: Omit<Customers, 'customer_id' | 'registration_date'>): void;
+    //getCustomerById(customer_id: string): Customers;
+    updateCustomer(customer: Customers): void;
+    deleteCustomerById(customer_id: string): void;
+}
+
+class CustomersCRUDImplementation implements CustomersCRUD{
+    // Function to add a new customer
+    addCustomer(customer: Omit<Customers, 'customer_id' | 'registration_date'>): void {
+        const query = `INSERT INTO Customers (name, email, address, phone)
+                        VALUES ( 'John Snow', 'john.snow@hotmail.com', '123 Winterfell', 1234567890);`;
+    }
+    
+    // Function to retrieve a customer by ID
+    //getCustomerById(customer_id: string): Customers {
+    //    const query = `SELECT * FROM Customers WHERE customer_id = 'CUST1';`;
+    //    return {};
+    //}
+
+    // Function to update a customer
+    updateCustomer(customer: Customers): void {
+        const query = `UPDATE customers SET
+            customer_id: 'CUST001',
+            name: 'John Snow New',
+            email: 'john.snownew@hotmail.com',
+            address: '123 Winterfell New',
+            phone: 1234567891,
+            registration_date: CURRENT_DATE
+            WHERE customer_id = 'CUST1';`;
+    }
+
+    // Function to delete a customer by ID
+    deleteCustomerById(customer_id: string): void {
+        const query = `DELETE FROM customers WHERE customer_id = 'CUST1';`;
+    }
+}
+```
 
 ## References
 
