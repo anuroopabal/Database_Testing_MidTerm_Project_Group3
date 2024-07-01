@@ -225,7 +225,7 @@ HAVING r.rating > (SELECT AVG(rating) FROM reviews);
 
 ``` 
 
-#### 4. Most Popular Genre by Sales 
+#### 4. The Most Popular Genre by Sales 
 
 ```sql 
 
@@ -238,7 +238,7 @@ LIMIT 1;
 
 ``` 
 
-#### 5. 10 Most Recent Posted Reviews 
+#### 5. The 10 Most Recent Posted Reviews by Customers
 
 ```sql 
 
