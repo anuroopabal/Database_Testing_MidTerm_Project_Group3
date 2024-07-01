@@ -147,7 +147,7 @@ CREATE TABLE sales (
 
 ## DDL/DML - CRUD Operations in books Table
 #### DDL:
-*SQL code is already provided in above section.*
+*SQL code for table creation is already provided in above section.*
 ```sql
 
 CREATE SEQUENCE book_id_seq START 1;
@@ -263,6 +263,7 @@ interface Customers {
     phone: number;
     registration_date: string;
 }
+
 interface CustomersCRUD{
     addCustomer(customer: Omit<Customers, 'customer_id' | 'registration_date'>): void;
     //getCustomerById(customer_id: string): Customers;
