@@ -276,12 +276,14 @@ class CustomersCRUDImplementation implements CustomersCRUD{
         const query = `INSERT INTO Customers (name, email, address, phone)
                         VALUES ( 'John Snow', 'john.snow@hotmail.com', '123 Winterfell', 1234567890);`;
     }
-    
+
     // Function to retrieve a customer by ID
-    //getCustomerById(customer_id: string): Customers {
-    //    const query = `SELECT * FROM Customers WHERE customer_id = 'CUST1';`;
-    //    return {};
-    //}
+    //As return type is specified, commenting for avoiding error.
+    //Can be uncommented when database connection is established and data is fetched.
+    /*getCustomerById(customer_id: string): Customers {
+       const query = `SELECT * FROM Customers WHERE customer_id = 'CUST1';`;
+        return {};
+    }*/
 
     // Function to update a customer
     updateCustomer(customer: Customers): void {
@@ -301,6 +303,7 @@ class CustomersCRUDImplementation implements CustomersCRUD{
     }
 }
 ```
+*Datebase client can be used to establish connection with 'OnlineBookStoreDB'.*
 
 ## References
 
